@@ -1,3 +1,4 @@
+// clasp push 接続テスト: 2026-10-05
 /** タイ暮らし：スプレッドシートに紐づけるGAS。最初は手動運用。 */
 const TZ = 'Asia/Bangkok';
 function onOpen(){SpreadsheetApp.getUi().createMenu('タイ暮らし').addItem('① 初期シートを作成','setupThaiLife').addItem('② JSONを書き出す','showExportDialog').addItem('③ データを検証・出力シート更新','runManualExport').addToUi();}
