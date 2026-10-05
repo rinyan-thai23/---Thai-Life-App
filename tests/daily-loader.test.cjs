@@ -25,7 +25,7 @@ test('configured endpoint used, successful JSON cached and offline data preserve
 test('fresh page recovers only cache belonging to configured endpoint',async()=>{
   const saved={'thai-life-daily-cache':JSON.stringify({url:'https://example.org/old',data:fixture})};
   const {c,get}=app(async()=>{throw Error('offline')},'https://example.org/new',saved);await c.loadDaily();assert.equal(get().dailyData,null);
-  const restored=app(async()=>{throw Error('offline')},'https://example.org/old',saved);await restored.c.loadDaily();assert.equal(restored.get().dailyData.fx.thb_jpy,4.6);
+  const restored=app(async()=>{throw Error('offline')},'https://example.org/old',saved);await restored.c.loadDaily();assert.equal(restored.get().dailyData.fx.thb_jpy,fixture.fx.thb_jpy);
 });
 test('invalid JSON never replaces previous valid shared data',async()=>{
   let data=fixture;const {c,get}=app(async()=>({ok:true,json:async()=>data}));await c.loadDaily();data={error:'not ready'};await c.loadDaily();assert.equal(get().dailyFailed,true);assert.equal(get().dailyData.schema_version,1);

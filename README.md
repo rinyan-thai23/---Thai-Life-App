@@ -16,14 +16,15 @@ GitHub Pagesで配信するPWA。データはGitHub Actionsで更新します。
 
 | update | 内容 |
 |---|---|
-| all | 為替・数字・休日すべて |
+| all | 為替・数字・休日・宝くじすべて |
 | daily | 為替と数字 |
 | fx | 為替のみ |
 | lucky | 数字のみ（実行ごとに再抽選） |
 | holidays | 当年・翌年の銀行休日 |
+| lotto | 宝くじ結果のみ |
 | none | データを変えず公開のみ |
 
-**定期実行は設定していません。** 将来はdailyを毎日タイ時間3時ごろ、holidaysを毎月1日に実行する想定です。
+**宝くじのみ毎日UTC 09:30（タイ時間16:30）に自動更新します。** Actionsの混雑などで開始が遅れる場合があります。為替・数字・休日の定期実行は未設定です。 将来はdailyを毎日タイ時間3時ごろ、holidaysを毎月1日に実行する想定です。
 mainへの通常pushではデータは更新せず、テストとサイト公開だけを行います。
 Actions内蔵のGITHUB_TOKENを使用します。Secretsへの登録や個人トークンは不要です。
 ブランチ保護で直接commitを禁止している場合、更新のpushが失敗します。前回公開サイトは残ります。
@@ -60,3 +61,13 @@ python -m http.server 8000 --directory docs
 - https://frankfurter.dev/
 - https://www.bot.or.th/en/financial-institutions-holiday.html
 - https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+
+## 宝くじ結果と出典
+
+GLO公式APIへペイロードなしPOSTで最新回を取得します。Node.jsを使用し、追加依存はありません。
+`node scripts/update-lotto.mjs` で手動取得できます。`docs/lotto-latest.json` に主要賞だけ保存します。
+日付だけでなく全内容を比較するため、同じ抽選日の訂正も反映します。結果未確定・件数不足・不正な数字・古い抽選日・通信エラーでは前回ファイルを残して失敗します。
+定期実行で内容が同じ場合はコミットと公開をスキップします。初回公開・通常pushは公開します。
+
+アプリの「結果を更新」は公開済み静的JSONを再取得します。GLO APIは調査時にブラウザー向けCORS許可がなかったため、直接API呼び出しは行いません。すぐ確認したい場合は公式サイト/PDFへ進めます。アプリには認証情報を配置しません。
+宝くじ結果と出典一覧は折りたたみ表示です。結果は購入・予測機能とは独立した公式発表の表示です。

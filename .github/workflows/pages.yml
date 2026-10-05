@@ -2,15 +2,17 @@ name: Update data and publish
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '30 9 * * *' # 宝くじのみ：タイ時間16:30
   workflow_dispatch:
     inputs:
       update:
         description: '更新対象（none は公開のみ）'
         type: choice
         default: all
-        options: [all, daily, fx, lucky, holidays, none]
+        options: [all, daily, fx, lucky, holidays, lotto, none]
 
-# Scheduled execution is intentionally disabled.
+# Other data remains manual. Scheduled runs update lottery results only.
 concurrency:
   group: thai-life-pages
   cancel-in-progress: false
@@ -24,6 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      publish: ${{ steps.save.outputs.publish }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -34,26 +38,37 @@ jobs:
       - name: Test
         run: node --test tests/*.test.cjs tests/*.test.mjs
       - name: Update shared data
-        if: github.event_name == 'workflow_dispatch' && inputs.update != 'none'
+        if: github.event_name == 'workflow_dispatch' && inputs.update != 'none' && inputs.update != 'lotto'
         env:
           UPDATE_MODE: ${{ inputs.update }}
         run: node scripts/update-data.mjs "$UPDATE_MODE"
+      - name: Update lottery results
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'lotto'))
+        run: node scripts/update-lotto.mjs
       - name: Save shared data
-        if: github.event_name == 'workflow_dispatch' && inputs.update != 'none'
+        id: save
+        env:
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/daily.json
+          git add docs/daily.json docs/lotto-latest.json
+          echo 'publish=true' >> "$GITHUB_OUTPUT"
           if ! git diff --cached --quiet; then
             git commit -m 'Update shared Thai Life data'
             git push origin HEAD:main
+          elif [ "$EVENT_NAME" = "schedule" ]; then
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
           fi
       - uses: actions/configure-pages@v5
+        if: steps.save.outputs.publish == 'true'
       - uses: actions/upload-pages-artifact@v4
+        if: steps.save.outputs.publish == 'true'
         with:
           path: docs
   deploy:
     needs: build
+    if: needs.build.outputs.publish == 'true'
     runs-on: ubuntu-latest
     permissions:
       pages: write
