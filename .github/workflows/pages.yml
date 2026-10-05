@@ -1,0 +1,66 @@
+name: Update data and publish
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      update:
+        description: '更新対象（none は公開のみ）'
+        type: choice
+        default: all
+        options: [all, daily, fx, lucky, holidays, none]
+
+# Scheduled execution is intentionally disabled.
+concurrency:
+  group: thai-life-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test
+        run: node --test tests/*.test.cjs tests/*.test.mjs
+      - name: Update shared data
+        if: github.event_name == 'workflow_dispatch' && inputs.update != 'none'
+        env:
+          UPDATE_MODE: ${{ inputs.update }}
+        run: node scripts/update-data.mjs "$UPDATE_MODE"
+      - name: Save shared data
+        if: github.event_name == 'workflow_dispatch' && inputs.update != 'none'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/daily.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update shared Thai Life data'
+            git push origin HEAD:main
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

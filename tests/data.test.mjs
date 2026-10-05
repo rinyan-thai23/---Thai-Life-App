@@ -1,0 +1,17 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {updateData,validateDaily,parseExchangeRates_,randomLuckyNumbers_} from '../scripts/data.mjs';
+const previous=JSON.parse(await readFile(new URL('../docs/daily.json',import.meta.url)));
+const fixtures={};for(const y of [2026,2027])fixtures[y]=JSON.parse(await readFile(new URL(`fixtures/bot-${y}.json`,import.meta.url)));
+const fx=[{base:'USD',quote:'JPY',rate:157.67,date:'2026-10-02'},{base:'USD',quote:'THB',rate:33.595,date:'2026-10-02'}];
+const now=new Date('2026-10-04T20:00:00Z');
+const getJson=async url=>url.includes('frankfurter')?fx:fixtures[/model\.(\d+)/.exec(url)[1]];
+test('all update obtains rates, unique strings and both years',async()=>{const d=await updateData(previous,'all',{getJson,now,random:()=>0});assert.equal(d.fx.thb_jpy,157.67/33.595);assert.deepEqual(d.lucky.numbers,['00','01','02']);assert.equal(d.lucky.date,'2026-10-05');assert.equal(d.holidays.length,38);assert.equal(d.holidays.find(h=>h.date==='2026-10-16').province,'Bangkok');assert.equal(d.updated_at,'2026-10-05T03:00:00+07:00');});
+test('individual updates preserve unrelated data',async()=>{for(const mode of ['fx','lucky','holidays']){const d=await updateData(previous,mode,{getJson,now});for(const key of ['fx','lucky','holidays'])if(key!==mode)assert.deepEqual(d[key],previous[key]);}});
+test('daily does not fetch holidays',async()=>{let calls=0;await updateData(previous,'daily',{now,getJson:async url=>{assert.ok(url.includes('frankfurter'));calls++;return fx}});assert.equal(calls,1);});
+test('network and validation failure leave input untouched',async()=>{const before=JSON.stringify(previous);await assert.rejects(updateData(previous,'all',{now,getJson:async()=>{throw Error('offline')}}));await assert.rejects(updateData(previous,'fx',{now,getJson:async()=>[]}));assert.equal(JSON.stringify(previous),before);});
+test('rates with old, mismatched dates or zero are rejected',()=>{assert.throws(()=>parseExchangeRates_(fx,'2026-10-20'));assert.throws(()=>parseExchangeRates_([fx[0],{...fx[1],rate:0}],'2026-10-05'));assert.throws(()=>parseExchangeRates_([fx[0],{...fx[1],date:'2026-10-01'}],'2026-10-05'));});
+test('random numbers are distinct two digit strings',()=>{for(let i=0;i<500;i++){const n=randomLuckyNumbers_(Math.random);assert.equal(new Set(n).size,3);assert.ok(n.every(s=>/^\d{2}$/.test(s)))}});
+test('unpublished next year retains previously saved future data',async()=>{const full=await updateData(previous,'all',{getJson,now});const d=await updateData(full,'holidays',{now,getJson:async url=>url.includes('2027')?{holidayCalendarLists:[]}:fixtures[2026]});assert.equal(d.holidays.length,38);});
+test('invalid file and unknown mode rejected',async()=>{assert.throws(()=>validateDaily({...previous,lucky:{numbers:['00','00','01'],is_sample:true}}));await assert.rejects(updateData(previous,'unknown'));});

@@ -1,23 +1,62 @@
-# タイ暮らし：アプリ・GAS一式
+# タイ暮らし / Thai Life
 
-公開済みプロトタイプの最新版です。
+GitHub Pagesで配信するPWA。データはGitHub Actionsで更新します。GAS・スプレッドシート・個人アクセストークンは不要です。
 
-- docs/：HTML・CSS・JavaScript、画像、地域データ、PM2.5取得、2026年銀行休日、サンプル為替・数字、PWA設定
-- gas/：スプレッドシートに貼るGASと手動運用手順書
+## 初回移行
 
-## Codexへの引き継ぎ
-GitHubのSettings → Pagesで、Sourceを「Deploy from a branch」、Branchをコードのあるブランチ（通常main）、Folderを「/docs」に設定する。
-公開URLは https://rinyan-thai23.github.io/---Thai-Life-App/ 。URLの末尾にdocs/は付けない。
-manifest.webmanifestのid・start_url・scopeは相対パス（./）に設定済み。Service Workerとアセットも相対パスで参照する。
-Googleスプレッドシート本体はGoogle側に置く。GASコードのコピーをリポジトリで管理する。実行場所はGoogle Apps Script。
-GAS運用手順はgas/README.mdを読む。「タイ暮らし」はシート名ではなく、上部メニュー。PCブラウザでシートを開き直すか、onOpenを実行する。
-為替・ランダム数字・銀行休日はGASの個別関数で手動更新できる。宝くじ分析は廃止。トリガーは未設定で、作成処理もない。アプリ接続にはWebアプリ公開後にdocs/config.jsのdailyUrlを設定する。手順はgas/README.mdを参照。
+1. ローカル変更（削除ファイル、新規.github/workflowsとscripts、testsも含む）をcommitしてmainへpush。
+2. GitHubの Settings → Pages → Source を **GitHub Actions** に変更。従来のmain /docs設定から切り替えます。
+3. Actions → **Update data and publish** → Run workflow → main / all を選んで実行。
+4. build と deploy の成功を確認し、公開サイトを開き直します。
 
-## 動作確認
-HTTPサーバーでdocs/を配信して確認する。ファイルを直接開くとJSON読込やService Workerが動作しない。
-例：python -m http.server 8000 --directory docs
-本番PWAはHTTPSで公開する。
+公開先: https://rinyan-thai23.github.io/---Thai-Life-App/
+公開対象フォルダーは引き続きdocsです。GASへのpushやWebアプリの再デプロイは不要です。
 
-## 公開データ
-同梱daily.jsonの為替とラッキーナンバーはサンプル。GAS接続後は手動更新した実レートとランダム数字を表示する。天気・PM2.5はOpen-Meteoのモデルデータ。休日は2026年BOT銀行休業日。官公庁の休業日は含まない。
-地域・個人の期限は利用者ブラウザに保存されるため、このZIPに個人の登録内容は含まれない。
+## 手動更新
+
+| update | 内容 |
+|---|---|
+| all | 為替・数字・休日すべて |
+| daily | 為替と数字 |
+| fx | 為替のみ |
+| lucky | 数字のみ（実行ごとに再抽選） |
+| holidays | 当年・翌年の銀行休日 |
+| none | データを変えず公開のみ |
+
+**定期実行は設定していません。** 将来はdailyを毎日タイ時間3時ごろ、holidaysを毎月1日に実行する想定です。
+mainへの通常pushではデータは更新せず、テストとサイト公開だけを行います。
+Actions内蔵のGITHUB_TOKENを使用します。Secretsへの登録や個人トークンは不要です。
+ブランチ保護で直接commitを禁止している場合、更新のpushが失敗します。前回公開サイトは残ります。
+Actionsがdaily.jsonをcommitするため、PCで作業する前にPullしてください。
+
+## データ
+
+- 為替: Frankfurter / ECBの参考レート。営業日ベース。10日より古い値は拒否。
+- 数字: 00〜99から重複なしで3つ。宝くじ分析は行いません。
+- 休日: BOT公式の当年・翌年の銀行休業日。日本語訳がない名称は英語表示。バンコク限定日を区別。南部の注記のみの追加休日、官公庁・入管の休日は自動取得しません。
+- 天気・PM2.5: ブラウザーからOpen-Meteoへ直接アクセス。
+- 個人の期限・地域: ブラウザー内のみ保存。
+
+更新元すべてを検証してからJSONを書き換えます。取得失敗時は保存・公開せず前回値を保持します。翌年が空リストの場合は既存の翌年分を保持します。別出典・手動追加の休日も残します。
+アプリは取得中表示と通信失敗時の前回データ表示に対応します。Pages公開後、既存タブを閉じて開き直すと古いアプリコードが残りにくくなります。
+
+## ローカル実行
+
+Node.js 22以上。追加パッケージは不要です。
+
+```sh
+node --test tests/*.test.cjs tests/*.test.mjs
+node scripts/update-data.mjs all
+python -m http.server 8000 --directory docs
+```
+
+## 旧GASの片付け
+
+ローカルのGASとclasp設定は廃止しました。Google側のスクリプト・シート・デプロイは変更していません。
+今回発行したThai-Life-GAS個人トークンはGitHub側で失効させ、GASのGITHUB_TOKENプロパティも削除できます。旧GASに登録済みトリガーがある場合は停止してください。
+
+## 出典
+
+- https://frankfurter.dev/
+- https://www.bot.or.th/en/financial-institutions-holiday.html
+- https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages

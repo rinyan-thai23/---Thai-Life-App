@@ -14,7 +14,7 @@ function app(fetch, url='', saved={}) {
   });
   vm.runInContext(fs.readFileSync(path.join(root,'docs/app.js'),'utf8').replace(/init\(\);\s*$/, ''),c);
   vm.runInContext('renderDaily=()=>{};',c);
-  return {c,saved,get:()=>vm.runInContext('({dailyData,dailyFailed})',c)};
+  return {c,saved,get:()=>vm.runInContext('({dailyData,dailyFailed,dailyLoading})',c)};
 }
 test('configured endpoint used, successful JSON cached and offline data preserved',async()=>{
   let failed=false,seen;
@@ -32,4 +32,11 @@ test('invalid JSON never replaces previous valid shared data',async()=>{
 });
 test('empty config uses bundled JSON and simultaneous refreshes share a request',async()=>{
   let calls=0,seen;const {c}=app(async url=>{calls++;seen=url;return {ok:true,json:async()=>fixture}});await Promise.all([c.loadDaily(),c.loadDaily()]);assert.equal(calls,1);assert.equal(seen,'daily.json');
+});
+
+test('loading state stays active until the response completes',async()=>{
+  let finish;const {c,get}=app(()=>new Promise(resolve=>{finish=resolve}));
+  const pending=c.loadDaily();assert.equal(get().dailyLoading,true);
+  finish({ok:true,json:async()=>fixture});await pending;
+  assert.equal(get().dailyLoading,false);assert.equal(get().dailyFailed,false);
 });
