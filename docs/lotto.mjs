@@ -21,7 +21,13 @@ function render(){
   $('lotto-heading').textContent=text('タイの宝くじ結果','Thai lottery results');
   $('lotto-refresh').textContent=text('結果を更新','Refresh results');
   $('lotto-official').textContent=text('公式サイトで最新結果を見る','See latest results on GLO');
-  $('lotto-summary').textContent=data?`${data.date}　${text('1等','First')}: ${data.first[0]} / ${text('下2桁','Last 2')}: ${data.last2[0]}`:text('結果を読み込み中…','Loading results…');
+  const summary=$('lotto-summary');summary.replaceChildren();
+  if(data){
+    const date=document.createElement('span');date.className='lotto-draw-date';date.textContent=data.date+text(' 抽選',' draw');
+    const highlights=document.createElement('span');highlights.className='lotto-highlights';
+    for(const key of ['first','last2']){const tile=document.createElement('span'),label=document.createElement('span'),number=document.createElement('strong');tile.className='lotto-highlight';label.textContent=text(...prizes[key]);number.textContent=data[key][0];tile.append(label,number);highlights.append(tile)}
+    summary.append(date,highlights);
+  }else summary.textContent=text('結果を読み込み中…','Loading results…');
   $('lotto-status').textContent=busy?text('更新中…','Updating…'):failed?text('取得できませんでした。保存済みの結果があれば表示しています。','Could not refresh. Showing saved results if available.'):text('毎日5:00・16:30ごろ（タイ時間）に確認。抽選日を確認してください。','Checked around 05:00 and 16:30 Thailand time daily. Check the draw date.');
   if(!data&&!busy&&failed)$('lotto-summary').textContent=text('結果を取得できませんでした','Results unavailable');
   const list=$('lotto-grid');list.replaceChildren();
