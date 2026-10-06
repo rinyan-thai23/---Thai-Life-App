@@ -24,3 +24,8 @@ summary::after{border:1px solid #f9df95;background:linear-gradient(#173d43,#173d
 details[open]>summary::after{border-color:#a7d7c5;background:linear-gradient(#173d43,#173d43) center/12px 2px no-repeat,#bce3d1}
 @media(prefers-reduced-motion:no-preference){summary::after{transition:transform .18s ease-out,box-shadow .18s ease-out,background-color .18s ease-out}summary:active::after{transform:translateY(-50%) scale(.9)}summary:focus-visible::after{transform:translateY(-50%) scale(1.08)}details[open]>summary::after{animation:disclosure-pop .22s ease-out}@keyframes disclosure-pop{0%{transform:translateY(-50%) scale(.9)}65%{transform:translateY(-50%) scale(1.1)}100%{transform:translateY(-50%) scale(1)}}}
 @media(hover:hover) and (prefers-reduced-motion:no-preference){summary:hover::after{transform:translateY(-50%) scale(1.08);box-shadow:0 3px 9px #071d2945}}
+
+/* Association edition branding. */
+.thai-header .brand img{width:64px;height:64px;flex-shrink:0;background:#fff;border-radius:12px;object-fit:contain}
+.thai-header .brand span{font-size:.68rem;letter-spacing:.04em;margin-top:3px}
+@media(max-width:599px){.thai-header .brand{gap:9px}.thai-header .brand img{width:54px;height:54px}.thai-header .brand span{font-size:.62rem}.thai-header .brand h1{font-size:1.15rem}}
