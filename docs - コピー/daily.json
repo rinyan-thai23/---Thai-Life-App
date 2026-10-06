@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-06T08:28:43+07:00",
+  "fx": {
+    "thb_jpy": 4.69594895385072,
+    "usd_thb": 33.695,
+    "as_of": "2026-10-05",
+    "is_sample": false,
+    "updated_at": "2026-10-06T08:28:43+07:00",
+    "source": "Frankfurter / ECB"
+  },
+  "lucky": {
+    "numbers": [
+      "26",
+      "89",
+      "00"
+    ],
+    "is_sample": false,
+    "date": "2026-10-06",
+    "updated_at": "2026-10-06T08:28:43+07:00"
+  },
+  "holiday_years": [
+    2026,
+    2027
+  ],
+  "holidays_checked_at": "2026-10-05",
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name_ja": "元日",
+      "name_en": "New Year’s Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-01-02",
+      "name_ja": "特別休日",
+      "name_en": "Additional special holiday",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-03-03",
+      "name_ja": "万仏節",
+      "name_en": "Makha Bucha Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-04-06",
+      "name_ja": "チャクリー王朝記念日",
+      "name_en": "Chakri Memorial Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-04-13",
+      "name_ja": "Songkran Festival",
+      "name_en": "Songkran Festival",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-04-14",
+      "name_ja": "Songkran Festival",
+      "name_en": "Songkran Festival",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-04-15",
+      "name_ja": "Songkran Festival",
+      "name_en": "Songkran Festival",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-05-01",
+      "name_ja": "労働者の日",
+      "name_en": "National Labor Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-05-04",
+      "name_ja": "戴冠記念日",
+      "name_en": "Coronation Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-06-01",
+      "name_ja": "Substitution for Visakha Bucha Day (Sunday 31st May 2026)",
+      "name_en": "Substitution for Visakha Bucha Day (Sunday 31st May 2026)",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-06-03",
+      "name_ja": "H.M. Queen Suthida Bajrasudhabimalalakshana’s Birthday",
+      "name_en": "H.M. Queen Suthida Bajrasudhabimalalakshana’s Birthday",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-07-28",
+      "name_ja": "H.M. King Maha Vajiralongkorn Phra Vajiraklaochaoyuhua’s Birthday",
+      "name_en": "H.M. King Maha Vajiralongkorn Phra Vajiraklaochaoyuhua’s Birthday",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-07-29",
+      "name_ja": "三宝節",
+      "name_en": "Asarnha Bucha Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-08-12",
+      "name_ja": "H.M. Queen Sirikit the Queen Mother’s Birthday and Mother’s Day",
+      "name_en": "H.M. Queen Sirikit the Queen Mother’s Birthday and Mother’s Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-10-13",
+      "name_ja": "H.M. King Bhumibol Adulyadej the Great Memorial Day",
+      "name_en": "H.M. King Bhumibol Adulyadej the Great Memorial Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-10-16",
+      "name_ja": "バンコク限定の特別休日",
+      "name_en": "Additional special holiday in Bangkok",
+      "type": "bank",
+      "province": "Bangkok",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-10-23",
+      "name_ja": "H.M. King Chulalongkorn the Great Memorial Day",
+      "name_en": "H.M. King Chulalongkorn the Great Memorial Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-12-07",
+      "name_ja": "Substitution for H.M. King Bhumibol Adulyadej the Great’s Birthday, National Day and Father’s Day (Saturday 5th December 2026)",
+      "name_en": "Substitution for H.M. King Bhumibol Adulyadej the Great’s Birthday, National Day and Father’s Day (Saturday 5th December 2026)",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-12-10",
+      "name_ja": "憲法記念日",
+      "name_en": "Constitution Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2026-12-31",
+      "name_ja": "大晦日",
+      "name_en": "New Year’s Eve",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-01-01",
+      "name_ja": "元日",
+      "name_en": "New Year’s Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-02-22",
+      "name_ja": "Substitution for Makha Bucha Day (Sunday 21st February 2027)",
+      "name_en": "Substitution for Makha Bucha Day (Sunday 21st February 2027)",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-04-06",
+      "name_ja": "チャクリー王朝記念日",
+      "name_en": "Chakri Memorial Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-04-13",
+      "name_ja": "Songkran Festival",
+      "name_en": "Songkran Festival",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-04-14",
+      "name_ja": "Songkran Festival",
+      "name_en": "Songkran Festival",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-04-15",
+      "name_ja": "Songkran Festival",
+      "name_en": "Songkran Festival",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-05-03",
+      "name_ja": "Substitution for National Labor Day (Saturday 1st May 2027)",
+      "name_en": "Substitution for National Labor Day (Saturday 1st May 2027)",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-05-04",
+      "name_ja": "戴冠記念日",
+      "name_en": "Coronation Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-05-20",
+      "name_ja": "Visakha Bucha Day",
+      "name_en": "Visakha Bucha Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-06-03",
+      "name_ja": "H.M. Queen Suthida Bajrasudhabimalalakshana’s Birthday",
+      "name_en": "H.M. Queen Suthida Bajrasudhabimalalakshana’s Birthday",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-07-19",
+      "name_ja": "Substitution for Asarnha Bucha Day (Sunday 18th July 2027)",
+      "name_en": "Substitution for Asarnha Bucha Day (Sunday 18th July 2027)",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-07-28",
+      "name_ja": "H.M. King Maha Vajiralongkorn Phra Vajiraklaochaoyuhua’s Birthday",
+      "name_en": "H.M. King Maha Vajiralongkorn Phra Vajiraklaochaoyuhua’s Birthday",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-08-12",
+      "name_ja": "H.M. Queen Sirikit the Queen Mother’s Birthday Anniversary and National Mother’s Day",
+      "name_en": "H.M. Queen Sirikit the Queen Mother’s Birthday Anniversary and National Mother’s Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-10-13",
+      "name_ja": "H.M. King Bhumibol Adulyadej the Great Memorial Day",
+      "name_en": "H.M. King Bhumibol Adulyadej the Great Memorial Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-10-25",
+      "name_ja": "Substitution for H.M. King Chulalongkorn the Great Memorial Day (Saturday 23rd October 2027)",
+      "name_en": "Substitution for H.M. King Chulalongkorn the Great Memorial Day (Saturday 23rd October 2027)",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-12-06",
+      "name_ja": "Substitution for H.M. King Bhumibol Adulyadej the Great’s Birthday, National Day and Father’s Day (Sunday 5th December 2027)",
+      "name_en": "Substitution for H.M. King Bhumibol Adulyadej the Great’s Birthday, National Day and Father’s Day (Sunday 5th December 2027)",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-12-10",
+      "name_ja": "憲法記念日",
+      "name_en": "Constitution Day",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    },
+    {
+      "date": "2027-12-31",
+      "name_ja": "大晦日",
+      "name_en": "New Year’s Eve",
+      "type": "bank",
+      "province": "all",
+      "source": "https://www.bot.or.th/en/financial-institutions-holiday.html"
+    }
+  ]
+}

@@ -29,8 +29,3 @@ details[open]>summary::after{border-color:#a7d7c5;background:linear-gradient(#17
 .thai-header .brand img{width:64px;height:64px;flex-shrink:0;background:#fff;border-radius:12px;object-fit:contain}
 .thai-header .brand span{font-size:.68rem;letter-spacing:.04em;margin-top:3px}
 @media(max-width:599px){.thai-header .brand{gap:9px}.thai-header .brand img{width:54px;height:54px}.thai-header .brand span{font-size:.62rem}.thai-header .brand h1{font-size:1.15rem}}
-
-.creator-credit{grid-column:1/-1;text-align:center;margin:8px 0 4px;padding:16px;border-top:1px solid #efd18a80;background:#102f39e8;border-radius:10px}
-.creator-credit a{display:inline-block;min-height:44px;padding:4px 12px;color:#ffe09a;font-size:1rem;font-weight:700;text-decoration:none}
-.creator-credit a span{display:block;margin-top:3px;color:#e0eae3;font-size:.8rem;font-weight:400}
-.creator-credit a:hover{text-decoration:underline;text-underline-offset:4px}

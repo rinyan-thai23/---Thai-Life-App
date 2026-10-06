@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="JACR">
+  <defs>
+    <linearGradient id="map" x2="1" y2="1"><stop stop-color="#63c6c1"/><stop offset="1" stop-color="#e9c875"/></linearGradient>
+  </defs>
+  <rect width="600" height="600" rx="58" fill="#f3f8ee"/>
+  <!-- Enlarged decorative map motif from the original logo. -->
+  <g transform="translate(-255,-20) scale(1.85,.72)">
+    <path d="M 235,50
+               C 260,40 285,45 305,65
+               C 325,85 345,110 330,140
+               C 315,170 335,195 380,205
+               C 425,215 440,240 435,280
+               C 430,320 380,350 340,360
+               C 300,370 280,390 270,420
+               C 265,435 255,480 250,530
+               C 245,580 235,640 230,700
+               C 225,750 215,800 205,840
+               C 195,810 185,740 190,690
+               C 195,640 205,580 205,530
+               C 205,480 195,440 185,410
+               C 165,350 145,320 150,270
+               C 155,220 170,180 190,140
+               C 210,100 215,60 235,50 Z" fill="url(#map)" stroke="#29958c" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+  <circle cx="217" cy="44" r="20" fill="#db4c49" stroke="#fff" stroke-width="7"/>
+  <text x="300" y="377" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="190" font-weight="900" letter-spacing="-7" fill="#103e45" stroke="#f3f8ee" stroke-width="12" paint-order="stroke fill">JACR</text>
+</svg>
