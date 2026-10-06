@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
   schedule:
+    - cron: '0 22 * * *' # タイ翌朝5時 / 日本翌朝7時
     - cron: '30 9 * * *' # 宝くじのみ：タイ時間16:30
   workflow_dispatch:
     inputs:
@@ -12,7 +13,7 @@ on:
         default: all
         options: [all, daily, fx, lucky, holidays, lotto, none]
 
-# Other data remains manual. Scheduled runs update lottery results only.
+# Morning: daily FX/numbers and monthly holidays. Afternoon: lottery only.
 concurrency:
   group: thai-life-pages
   cancel-in-progress: false
@@ -38,10 +39,16 @@ jobs:
       - name: Test
         run: node --test tests/*.test.cjs tests/*.test.mjs
       - name: Update shared data
-        if: github.event_name == 'workflow_dispatch' && inputs.update != 'none' && inputs.update != 'lotto'
+        if: (github.event_name == 'schedule' && github.event.schedule == '0 22 * * *') || (github.event_name == 'workflow_dispatch' && inputs.update != 'none' && inputs.update != 'lotto')
         env:
           UPDATE_MODE: ${{ inputs.update }}
-        run: node scripts/update-data.mjs "$UPDATE_MODE"
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            UPDATE_MODE=daily
+            if [ "$(TZ=Asia/Bangkok date +%d)" = "01" ]; then UPDATE_MODE=all; fi
+          fi
+          node scripts/update-data.mjs "$UPDATE_MODE"
       - name: Update lottery results
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'lotto'))
         run: node scripts/update-lotto.mjs

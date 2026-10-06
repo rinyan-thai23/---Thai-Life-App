@@ -5,7 +5,7 @@ if(!response.ok)throw Error('GLO HTTP '+response.status);
 const next=parseLotto(await response.json());
 const file=new URL('../docs/lotto-latest.json',import.meta.url);
 let old=null;
-try{old=validateLotto(JSON.parse(await readFile(file,'utf8')))}catch(error){if(error.code!=='ENOENT')throw error}
+try{old=JSON.parse(await readFile(file,'utf8')); if(!/^\d{4}-\d{2}-\d{2}$/.test(old.date))throw Error('Invalid saved date')}catch(error){if(error.code!=='ENOENT')throw error}
 if(old&&next.date<old.date)throw Error('GLO returned an older draw; keeping saved results');
 if(JSON.stringify(old)===JSON.stringify(next)){console.log('Lottery results unchanged');}
 else{
