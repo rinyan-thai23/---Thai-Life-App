@@ -4,3 +4,41 @@
 .guide summary{min-height:48px;line-height:1.6}.lotto-summary{display:block;font-weight:500;font-size:1rem;margin-top:8px;overflow-wrap:anywhere}.lotto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px}.lotto-grid>div{background:#edf5f6;padding:16px;border-radius:12px}.lotto-grid span,.lotto-grid strong{display:block}.lotto-grid strong{font-size:1.4rem;margin-top:8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.lotto-links a,.sources a{color:#135d66;display:inline-block;padding:12px 0;min-height:48px}.lotto-links{display:flex;gap:20px;flex-wrap:wrap}.sources ul{padding-left:24px;line-height:1.7}[hidden]{display:none!important}
 
 .ticket-check{margin:22px 0;padding:18px;background:#edf5f6;border-radius:12px}.ticket-check input{font-size:1.5rem;letter-spacing:.15em;margin:10px 0}.ticket-check button{width:100%}.ticket-check p{font-size:1rem}.lotto-all{margin-top:24px}.lotto-number-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px}.lotto-number-list span{padding:10px;background:#f0f4f6;border-radius:6px;font-size:1.1rem;font-variant-numeric:tabular-nums;text-align:center}
+
+/* Calm color cues and generous controls for everyday reading. */
+:root{background:#f5f3ee;color:#203e42;line-height:1.65}
+body{background:radial-gradient(ellipse at 10% 0%,#e3efeb 0,transparent 42%),#f5f3ee}
+header{background:#fffdf8;border-bottom-color:#e1e6df;padding-top:24px;padding-bottom:24px}
+h1{font-size:1.6rem;letter-spacing:.06em}.brand span{color:#456660}
+main{max-width:880px;padding-top:24px;gap:22px}
+.dayline{padding:0 4px;font-weight:650}.prototype{background:#fffaf0;border-color:#dbcaa5;color:#725627}
+.card{--accent:#135d66;--tint:#f5faf8;border:1px solid #dbe4df;border-top:4px solid var(--accent);background:linear-gradient(145deg,var(--tint),#fff 75%);border-radius:22px;box-shadow:0 5px 20px #233f3810;padding:26px;min-width:0}
+.weather{--accent:#286e71;background:radial-gradient(ellipse at 100% 0%,#2c8280,transparent 65%),linear-gradient(130deg,#16484e,#135d66);color:#fff;border-color:#286e71;box-shadow:0 10px 28px #174c4e22}
+.deadlines{--accent:#ae6b2b;--tint:#fff4e6}.exchange{--accent:#378267;--tint:#eaf6ed}.holidays{--accent:#526faa;--tint:#edf2ff}.lucky{--accent:#9167a4;--tint:#f6edfa}.lotto{--accent:#b97e28;--tint:#fff5de}.sources{--accent:#758883;--tint:#f4f7f5}
+.section-head{margin-bottom:22px}.section-head h2{font-size:1.18rem;line-height:1.6}.asset-icon{background-color:#ffffffbb;box-shadow:0 2px 8px #254e4210}
+button{min-height:52px;box-shadow:0 2px 0 #143c4210}button:active{transform:translateY(1px)}
+input,select{min-height:56px;border-color:#adbfb9;box-shadow:inset 0 1px 3px #204a4010}
+input:focus,select:focus{border-color:#135d66}
+.weather select{border:0}.weather .small{min-height:48px;background:#ffffff20}
+.forecast-day{background:#ffffff0b;border:1px solid #ffffff25;border-radius:12px}
+#air{background:#ffffff0c;padding:18px;border-radius:14px;border:1px solid #ffffff25}
+.deadline-row{border-color:#e9d8c2}.count{color:#7e4d1e}.count.danger{color:#a72c22}.chip{background:#fff8ed;color:#704f2d;border:1px solid #e6d7bf}
+.rategrid>div{border:1px solid #cce3d4;background:#ffffffc9;border-radius:14px;padding:16px;border-top:3px solid #378267}.rategrid strong{color:#23624a;font-size:1.7rem;font-variant-numeric:tabular-nums}
+#conversion{background:#e3f1e8;color:#23553f;border:1px solid #c4decf;font-size:1.05rem}
+.holiday-row{border-color:#d7e0f1}.holiday-row strong{color:#34538c}.holiday-row>div{font-weight:550;overflow-wrap:anywhere}.holiday-row span{color:#455b79}
+.numbers{padding:12px 0 18px;gap:14px}.numbers span{background:linear-gradient(145deg,#fff,#ece0f3);border-color:#d8c5e3;color:#71458a;box-shadow:0 5px 12px #79548c15;font-size:2rem}
+.hint{font-size:.9rem;color:#50666a}.source,footer{font-size:.85rem}.weather .source{color:#e0eef0}
+.guide>summary,.lotto-all>summary{list-style:none;position:relative;padding-right:40px;min-height:48px;display:flex;flex-direction:column;justify-content:center;font-size:1.08rem}
+summary::-webkit-details-marker{display:none}.guide>summary::after,.lotto-all>summary::after{content:'+';position:absolute;right:0;top:6px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#ffffffb0;border:1px solid #ccd8d2;color:#244f4c;font-size:1.2rem;font-weight:500}
+.guide[open]>summary::after,.lotto-all[open]>summary::after{content:'−'}
+.guide[open]>summary{padding-bottom:16px;margin-bottom:12px;border-bottom:1px solid #dbe1d8}
+.lotto-summary{color:#795420;line-height:1.9;font-variant-numeric:tabular-nums}
+.ticket-check{background:#f8ecd5;border:1px solid #e6d2ad}.ticket-check label{font-weight:650}.ticket-check button{background:#775321;border-color:#775321;color:#fff}.ticket-check button:hover{background:#614218}
+.lotto-grid>div{background:#fffaf0;border:1px solid #e7d7b8}.lotto-grid strong{color:#775321}.lotto-number-list span{background:#fffaf0;border:1px solid #eadfc9}
+.sources ul{margin-bottom:0}.sources li{margin-bottom:6px}.sources a{font-weight:550}footer{padding:8px 16px;color:#4f6462}
+@media(hover:hover){button{transition:background-color .18s,transform .18s,box-shadow .18s}button:hover{box-shadow:0 4px 10px #20463b18}.card{transition:box-shadow .2s}.card:hover{box-shadow:0 8px 24px #233f3817}}
+@media(prefers-reduced-motion:no-preference){.card{animation:card-arrive .4s ease-out both}.deadlines{animation-delay:.05s}.exchange{animation-delay:.1s}.holidays{animation-delay:.15s}.lucky{animation-delay:.2s}details[open]>:not(summary){animation:detail-open .22s ease-out}@keyframes card-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes detail-open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}}
+@media(max-width:699px){.card{padding:22px;margin-bottom:20px}main{padding:20px 16px}.rategrid>div{padding:12px}.section-head{gap:8px}.section-head h2{font-size:1.1rem}.brand img{width:54px;height:54px}}
+@media(max-width:380px){main{padding:16px 10px}.card{padding:18px 14px}.rategrid strong{font-size:1.4rem}.section-head .chip{margin-left:56px}.brand{gap:8px}h1{font-size:1.3rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:699px){.deadlines .section-head h2{flex-basis:calc(100% - 56px)}.section-head .chip{margin-left:56px}}
