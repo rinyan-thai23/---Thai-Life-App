@@ -7,7 +7,29 @@ function save(){try{localStorage.setItem('thai-life-v1',JSON.stringify(state));s
 function todayISO(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
 function remaining(date){return Math.round((Date.parse(date+'T00:00:00Z')-Date.parse(todayISO()+'T00:00:00Z'))/86400000)}
 function countLabel(value){if(!value)return t('unset');const n=remaining(value);if(!Number.isFinite(n))return t('unset');if(n===0)return t('due');return state.lang==='ja'?`${n<0?t('overdue'):t('remaining')} <strong>${Math.abs(n)}</strong> ${t('days')}`:`<strong>${Math.abs(n)}</strong> ${n<0?t('overdue'):t('days')}`}
-function renderDates(){const list=$('deadline-list');list.replaceChildren();['report','visa','passport','license'].forEach(key=>{const row=document.createElement('div');row.className='deadline-row';const name=document.createElement('span');name.className='deadline-name';name.textContent=t(key);const count=document.createElement('span');count.className='count'+(state.dates[key]&&remaining(state.dates[key])<=7?' danger':'');count.innerHTML=countLabel(state.dates[key]);count.setAttribute('aria-live','polite');const label=document.createElement('label');const input=document.createElement('input');input.type='date';input.value=state.dates[key]||'';input.setAttribute('aria-label',t(key));input.addEventListener('change',()=>{state.dates[key]=input.value;if(save())toast(t('saved'));count.innerHTML=countLabel(input.value);count.className='count'+(input.value&&remaining(input.value)<=7?' danger':'')});label.append(input);row.append(name,count,label);list.append(row)})}
+function renderDeadlineList(){
+  const list=$('deadline-list');list.replaceChildren();
+  const keys=['report','visa','passport','license'].filter(key=>state.dates[key]).sort((a,b)=>state.dates[a].localeCompare(state.dates[b]));
+  if(!keys.length){const empty=document.createElement('p');empty.className='deadline-empty';empty.textContent=state.lang==='ja'?'登録した期限がここに表示されます。':'Your saved deadlines appear here.';list.append(empty)}
+  for(const key of keys){
+    const row=document.createElement('div');row.className='deadline-row';
+    const name=document.createElement('span');name.className='deadline-name';name.textContent=t(key);
+    const count=document.createElement('span');count.className='count'+(remaining(state.dates[key])<=7?' danger':'');count.innerHTML=countLabel(state.dates[key]);
+    const date=document.createElement('time');date.dateTime=state.dates[key];date.textContent=state.dates[key].replaceAll('-','/');
+    row.append(name,count,date);list.append(row);
+  }
+}
+function renderDates(){
+  renderDeadlineList();
+  $('deadline-edit-title').textContent=state.lang==='ja'?'期限を登録・編集':'Add / edit deadlines';
+  const editor=$('deadline-editor');editor.replaceChildren();
+  for(const key of ['report','visa','passport','license']){
+    const label=document.createElement('label'),name=document.createElement('span'),input=document.createElement('input');
+    name.textContent=t(key);input.type='date';input.value=state.dates[key]||'';input.setAttribute('aria-label',t(key));
+    input.addEventListener('change',()=>{state.dates[key]=input.value;if(save())toast(t('saved'));renderDeadlineList()});
+    label.append(name,input);editor.append(label);
+  }
+}
 function currentProvince(){return regions.find(x=>x.id===Number(state.province))||regions.find(x=>x.en==='Chiang Rai')||regions[0]}
 function currentDistrict(){return currentProvince()?.districts.find(x=>x.id===Number(state.district))||currentProvince()?.districts[0]}
 function renderRegions(){if(!regions.length)return;const p=currentProvince();state.province=p.id;$('province').replaceChildren(...regions.slice().sort((a,b)=>a.en.localeCompare(b.en)).map(x=>new Option(state.lang==='ja'?`${x.ja}${x.ja===x.en?'':` / ${x.en}`}`:x.en,x.id)));$('province').value=String(p.id);const d=currentDistrict();state.district=d.id;$('district').replaceChildren(...p.districts.map(x=>new Option(`${x.en} · ${x.th}`,x.id)));$('district').value=String(d.id)}
