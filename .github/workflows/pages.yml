@@ -11,7 +11,7 @@ on:
         description: '更新対象（none は公開のみ）'
         type: choice
         default: all
-        options: [all, daily, fx, lucky, holidays, lotto, none]
+        options: [all, daily, fx, lucky, holidays, lotto, fuel, none]
 
 # Morning: daily FX/numbers and monthly holidays. Afternoon: lottery only.
 concurrency:
@@ -39,7 +39,7 @@ jobs:
       - name: Test
         run: node --test tests/*.test.cjs tests/*.test.mjs
       - name: Update shared data
-        if: (github.event_name == 'schedule' && github.event.schedule == '0 22 * * *') || (github.event_name == 'workflow_dispatch' && inputs.update != 'none' && inputs.update != 'lotto')
+        if: (github.event_name == 'schedule' && github.event.schedule == '0 22 * * *') || (github.event_name == 'workflow_dispatch' && inputs.update != 'none' && inputs.update != 'lotto' && inputs.update != 'fuel')
         env:
           UPDATE_MODE: ${{ inputs.update }}
           EVENT_NAME: ${{ github.event_name }}
@@ -52,6 +52,10 @@ jobs:
       - name: Update lottery results
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'lotto'))
         run: node scripts/update-lotto.mjs
+      - name: Update fuel prices
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'fuel'))
+        continue-on-error: true
+        run: node scripts/update-fuel.mjs
       - name: Save shared data
         id: save
         env:
@@ -59,7 +63,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/daily.json docs/lotto-latest.json
+          git add docs/daily.json docs/lotto-latest.json docs/fuel.json
           echo 'publish=true' >> "$GITHUB_OUTPUT"
           if ! git diff --cached --quiet; then
             git commit -m 'Update shared Thai Life data'
