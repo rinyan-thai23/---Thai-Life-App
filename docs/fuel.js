@@ -10,7 +10,19 @@ async function load(){if(busy)return;busy=true;button.disabled=true;status.textC
  const labels=[(current?'今日 ':'')+(base.getUTCMonth()+1)+'/'+base.getUTCDate(),(current?'明日 ':'')+(next.getUTCMonth()+1)+'/'+next.getUTCDate()];
  list.replaceChildren(...ordered.map(x=>{
   const row=document.createElement('div'),label=document.createElement('span'),values=document.createElement('div');row.className='fuel-row';label.className='fuel-name';label.textContent=names[x.name]||x.name;values.className='fuel-values';
-  [x.price,x.tomorrow].forEach((value,i)=>{const cell=document.createElement('div'),caption=document.createElement('span'),price=document.createElement('strong');caption.textContent=labels[i];price.textContent=Number.isFinite(value)&&value>0?value.toFixed(2):'—';cell.append(caption,price);values.append(cell)});
+  [x.price,x.tomorrow].forEach((value,i)=>{
+   const cell=document.createElement('div'),caption=document.createElement('span'),line=document.createElement('div'),price=document.createElement('strong');
+   caption.className='fuel-day';caption.textContent=labels[i];line.className='fuel-price-line';price.textContent=Number.isFinite(value)&&value>0?value.toFixed(2):'—';
+   if(i===1)price.className='fuel-tomorrow';line.append(price);
+   if(i===1){
+    const badge=document.createElement('span');const valid=Number.isFinite(value)&&value>0;
+    const cents=valid?Math.round(value*100)-Math.round(x.price*100):null;
+    badge.className='fuel-diff '+(cents===null?'unknown':cents>0?'up':cents<0?'down':'same');
+    badge.textContent=cents===null?'未定':cents===0?'--':(cents>0?'+':'-')+(Math.abs(cents)/100).toFixed(2);
+    badge.setAttribute('aria-label',cents===null?'明日の価格未取得':cents===0?'今日と同額':'今日との差額 '+badge.textContent+' バーツ／リットル');line.append(badge);
+   }
+   cell.append(caption,line);values.append(cell);
+  });
   row.append(label,values);return row;
  }));
  status.textContent=(Date.now()-Date.parse(data.fetched_at)>48*3600000?'保存データが古くなっています。':'')+'取得：'+new Date(data.fetched_at).toLocaleString('ja-JP',{timeZone:'Asia/Bangkok'})+'（タイ時間）';
