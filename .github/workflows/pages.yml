@@ -5,6 +5,7 @@ on:
   schedule:
     - cron: '0 22 * * *' # タイ翌朝5時 / 日本翌朝7時
     - cron: '30 9 * * *' # 宝くじのみ：タイ時間16:30
+    - cron: '0 0,10,14 * * *' # 燃料のみ：タイ時間7時・17時・21時
   workflow_dispatch:
     inputs:
       update:
@@ -13,7 +14,7 @@ on:
         default: all
         options: [all, daily, fx, lucky, holidays, lotto, fuel, none]
 
-# Morning: daily FX/numbers and monthly holidays. Afternoon: lottery only.
+# Fuel runs separately at 07:00, 17:00 and 21:00 Thailand time.
 concurrency:
   group: thai-life-pages
   cancel-in-progress: false
@@ -50,10 +51,10 @@ jobs:
           fi
           node scripts/update-data.mjs "$UPDATE_MODE"
       - name: Update lottery results
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'lotto'))
+        if: (github.event_name == 'schedule' && github.event.schedule != '0 0,10,14 * * *') || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'lotto'))
         run: node scripts/update-lotto.mjs
       - name: Update fuel prices
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'fuel'))
+        if: (github.event_name == 'schedule' && github.event.schedule == '0 0,10,14 * * *') || (github.event_name == 'workflow_dispatch' && (inputs.update == 'all' || inputs.update == 'fuel'))
         continue-on-error: true
         run: node scripts/update-fuel.mjs
       - name: Save shared data
