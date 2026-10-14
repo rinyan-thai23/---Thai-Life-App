@@ -6,36 +6,44 @@
   "items": [
     {
       "name": "DIESEL B20",
-      "price": 37.19
+      "price": 37.19,
+      "tomorrow": 37.19
     },
     {
       "name": "Hi Diesel S",
-      "price": 42.94
+      "price": 42.94,
+      "tomorrow": 42.94
     },
     {
       "name": "Hi Premium Diesel Plus",
-      "price": 50.05
+      "price": 50.05,
+      "tomorrow": 50.05
     },
     {
       "name": "Hi Premium 98 Plus",
-      "price": 49.29
+      "price": 49.29,
+      "tomorrow": 49.29
     },
     {
       "name": "Gasohol E85 S EVO",
-      "price": 31.63
+      "price": 31.63,
+      "tomorrow": 31.63
     },
     {
       "name": "Gasohol E20 S EVO",
-      "price": 35.69
+      "price": 35.69,
+      "tomorrow": 35.69
     },
     {
       "name": "Gasohol 91 S EVO",
-      "price": 41.07
+      "price": 41.07,
+      "tomorrow": 41.07
     },
     {
       "name": "Gasohol 95 S EVO",
-      "price": 41.44
+      "price": 41.44,
+      "tomorrow": 41.44
     }
   ],
-  "fetched_at": "2026-10-14T05:13:01.534Z"
+  "fetched_at": "2026-10-14T05:31:17.974Z"
 }

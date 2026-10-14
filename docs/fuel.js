@@ -6,7 +6,13 @@ async function load(){if(busy)return;busy=true;button.disabled=true;status.textC
  const r=await fetch('fuel.json',{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error();const data=await r.json();
  if(!Array.isArray(data.items)||!data.items.length||!Number.isFinite(Date.parse(data.fetched_at))||data.items.some(x=>typeof x.name!=='string'||!Number.isFinite(x.price)||x.price<=0))throw Error();
  const ordered=[...data.items].sort((a,b)=>{const keys=Object.keys(names);return (keys.indexOf(a.name)<0?99:keys.indexOf(a.name))-(keys.indexOf(b.name)<0?99:keys.indexOf(b.name))});
- list.replaceChildren(...ordered.map(x=>{const row=document.createElement('div'),label=document.createElement('span'),price=document.createElement('strong');row.className='fuel-row';label.textContent=names[x.name]||x.name;price.textContent=x.price.toFixed(2);row.append(label,price);return row}));
+ const parts=String(data.date).split('/').map(Number);const base=new Date(Date.UTC(parts[2],parts[1]-1,parts[0]));if(!Number.isFinite(base.getTime()))throw Error();const next=new Date(base.getTime()+86400000);const current=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Bangkok'}).format(new Date())===data.date;
+ const labels=[(current?'今日 ':'')+(base.getUTCMonth()+1)+'/'+base.getUTCDate(),(current?'明日 ':'')+(next.getUTCMonth()+1)+'/'+next.getUTCDate()];
+ list.replaceChildren(...ordered.map(x=>{
+  const row=document.createElement('div'),label=document.createElement('span'),values=document.createElement('div');row.className='fuel-row';label.className='fuel-name';label.textContent=names[x.name]||x.name;values.className='fuel-values';
+  [x.price,x.tomorrow].forEach((value,i)=>{const cell=document.createElement('div'),caption=document.createElement('span'),price=document.createElement('strong');caption.textContent=labels[i];price.textContent=Number.isFinite(value)&&value>0?value.toFixed(2):'—';cell.append(caption,price);values.append(cell)});
+  row.append(label,values);return row;
+ }));
  status.textContent=(Date.now()-Date.parse(data.fetched_at)>48*3600000?'保存データが古くなっています。':'')+'取得：'+new Date(data.fetched_at).toLocaleString('ja-JP',{timeZone:'Asia/Bangkok'})+'（タイ時間）';
 }catch{status.textContent='更新できませんでした。表示中の価格がある場合は前回取得分です。公式表示も確認できます。'}finally{busy=false;button.disabled=false}}
 button.addEventListener('click',load);

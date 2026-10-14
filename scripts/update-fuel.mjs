@@ -6,7 +6,7 @@ export function parseFuel(raw){
  if(!r||!/^\d{2}\/\d{2}\/\d{4}$/.test(r.OilDateNow))throw Error('Invalid fuel date');
  let list=r.OilList;for(let i=0;i<2&&typeof list==='string';i++)list=JSON.parse(list);
  if(!Array.isArray(list)||list.length<4)throw Error('Incomplete fuel data');
- const items=list.map(x=>{if(typeof x.OilName!=='string'||!Number.isFinite(x.PriceToday)||x.PriceToday<=0)throw Error('Invalid fuel price');return {name:x.OilName,price:x.PriceToday}});
+ const items=list.map(x=>{if(typeof x.OilName!=='string'||!Number.isFinite(x.PriceToday)||x.PriceToday<=0)throw Error('Invalid fuel price');if(x.PriceTomorrow!=null&&(!Number.isFinite(x.PriceTomorrow)||x.PriceTomorrow<=0))throw Error('Invalid tomorrow price');return {name:x.OilName,price:x.PriceToday,tomorrow:x.PriceTomorrow??null}});
  if(new Set(items.map(x=>x.name)).size!==items.length)throw Error('Duplicate fuel');
  return {source:API,date:r.OilDateNow,announcement_date:r.OilPriceDate,effective_note:r.OilRemark2,items};
 }
