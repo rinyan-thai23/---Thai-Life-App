@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-25T06:55:03+07:00",
+  "updated_at": "2026-10-26T06:42:32+07:00",
   "fx": {
     "thb_jpy": 4.6466143132315905,
     "usd_thb": 33.745,
     "as_of": "2026-10-23",
     "is_sample": false,
-    "updated_at": "2026-10-25T06:55:03+07:00",
+    "updated_at": "2026-10-26T06:42:32+07:00",
     "source": "Frankfurter / ECB"
   },
   "lucky": {
     "numbers": [
-      "05",
-      "16",
-      "28"
+      "84",
+      "77",
+      "82"
     ],
     "is_sample": false,
-    "date": "2026-10-25",
-    "updated_at": "2026-10-25T06:55:03+07:00"
+    "date": "2026-10-26",
+    "updated_at": "2026-10-26T06:42:32+07:00"
   },
   "holiday_years": [
     2026,
