@@ -1,8 +1,8 @@
 {
   "source": "https://oil-price.bangchak.co.th/ApiOilPrice2/en",
-  "date": "05/11/2026",
-  "announcement_date": "04/11/2026",
-  "effective_note": "Are effective on 5 November 2026 from 05:00 AM",
+  "date": "06/11/2026",
+  "announcement_date": "05/11/2026",
+  "effective_note": "Are effective on 6 November 2026 from 05:00 AM",
   "items": [
     {
       "name": "DIESEL B20",
@@ -12,7 +12,7 @@
     {
       "name": "Hi Diesel S",
       "price": 42.54,
-      "tomorrow": 42.54
+      "tomorrow": 41.79
     },
     {
       "name": "Hi Premium Diesel Plus",
@@ -27,23 +27,23 @@
     {
       "name": "Gasohol E85 S EVO",
       "price": 31.63,
-      "tomorrow": 31.63
+      "tomorrow": 30.63
     },
     {
       "name": "Gasohol E20 S EVO",
       "price": 32.8,
-      "tomorrow": 32.8
+      "tomorrow": 31.8
     },
     {
       "name": "Gasohol 91 S EVO",
       "price": 40.47,
-      "tomorrow": 40.47
+      "tomorrow": 39.47
     },
     {
       "name": "Gasohol 95 S EVO",
       "price": 40.84,
-      "tomorrow": 40.84
+      "tomorrow": 39.84
     }
   ],
-  "fetched_at": "2026-11-05T04:51:15.886Z"
+  "fetched_at": "2026-11-05T17:49:06.745Z"
 }
