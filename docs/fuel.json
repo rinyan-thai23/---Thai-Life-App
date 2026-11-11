@@ -11,7 +11,7 @@
     },
     {
       "name": "Hi Diesel S",
-      "price": 41.79,
+      "price": 40.79,
       "tomorrow": 40.79
     },
     {
@@ -31,19 +31,19 @@
     },
     {
       "name": "Gasohol E20 S EVO",
-      "price": 31.8,
+      "price": 31.3,
       "tomorrow": 31.3
     },
     {
       "name": "Gasohol 91 S EVO",
-      "price": 39.47,
+      "price": 38.97,
       "tomorrow": 38.97
     },
     {
       "name": "Gasohol 95 S EVO",
-      "price": 39.84,
+      "price": 39.34,
       "tomorrow": 39.34
     }
   ],
-  "fetched_at": "2026-11-10T17:26:35.719Z"
+  "fetched_at": "2026-11-11T04:23:28.007Z"
 }
