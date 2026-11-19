@@ -31,19 +31,19 @@
     },
     {
       "name": "Gasohol E20 S EVO",
-      "price": 30.8,
+      "price": 30.1,
       "tomorrow": 30.1
     },
     {
       "name": "Gasohol 91 S EVO",
-      "price": 38.47,
+      "price": 37.77,
       "tomorrow": 37.77
     },
     {
       "name": "Gasohol 95 S EVO",
-      "price": 38.84,
+      "price": 38.14,
       "tomorrow": 38.14
     }
   ],
-  "fetched_at": "2026-11-18T18:36:15.632Z"
+  "fetched_at": "2026-11-19T05:40:27.061Z"
 }
