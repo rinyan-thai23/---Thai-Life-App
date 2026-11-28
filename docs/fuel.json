@@ -1,6 +1,6 @@
 {
   "source": "https://oil-price.bangchak.co.th/ApiOilPrice2/en",
-  "date": "28/11/2026",
+  "date": "29/11/2026",
   "announcement_date": "25/11/2026",
   "effective_note": "Are effective on 26 November 2026 from 5:00 PM",
   "items": [
@@ -45,5 +45,5 @@
       "tomorrow": 37.44
     }
   ],
-  "fetched_at": "2026-11-28T05:59:46.505Z"
+  "fetched_at": "2026-11-28T17:54:55.001Z"
 }
